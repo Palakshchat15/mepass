@@ -14,15 +14,14 @@ const app = express();
 
 // Middleware
 app.use(cors({
-    origin: [
-        'http://localhost:3000',
-        'https://mepass-frontend.onrender.com',
-        process.env.FRONTEND_URL
-    ].filter(Boolean),
-    credentials: true,
+    origin: '*',
+    credentials: false,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization']
 }));
+
+// Handle preflight requests explicitly
+app.options('*', cors());
 app.use(express.json());
 
 // Serve uploaded files statically
